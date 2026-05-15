@@ -1,0 +1,121 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 16 16 200 208)
+	(text "regbank" (rect 5 0 53 15)(font "Intel Clear" (font_size 8)))
+	(text "inst" (rect 8 176 25 188)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "in[15..0]" (rect 0 0 48 15)(font "Intel Clear" (font_size 8)))
+		(text "in[15..0]" (rect 21 27 69 42)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "saveReg0" (rect 0 0 56 15)(font "Intel Clear" (font_size 8)))
+		(text "saveReg0" (rect 21 43 77 58)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "selA[1..0]" (rect 0 0 55 15)(font "Intel Clear" (font_size 8)))
+		(text "selA[1..0]" (rect 21 59 76 74)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "clk" (rect 0 0 17 15)(font "Intel Clear" (font_size 8)))
+		(text "clk" (rect 21 75 38 90)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "nreset" (rect 0 0 37 15)(font "Intel Clear" (font_size 8)))
+		(text "nreset" (rect 21 91 58 106)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "saveReg1" (rect 0 0 56 15)(font "Intel Clear" (font_size 8)))
+		(text "saveReg1" (rect 21 107 77 122)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "selB[1..0]" (rect 0 0 55 15)(font "Intel Clear" (font_size 8)))
+		(text "selB[1..0]" (rect 21 123 76 138)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "saveReg2" (rect 0 0 56 15)(font "Intel Clear" (font_size 8)))
+		(text "saveReg2" (rect 21 139 77 154)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 184 32)
+		(output)
+		(text "outA[15..0]" (rect 0 0 66 15)(font "Intel Clear" (font_size 8)))
+		(text "outA[15..0]" (rect 97 27 163 42)(font "Intel Clear" (font_size 8)))
+		(line (pt 184 32)(pt 168 32)(line_width 3))
+	)
+	(port
+		(pt 184 48)
+		(output)
+		(text "outB[15..0]" (rect 0 0 66 15)(font "Intel Clear" (font_size 8)))
+		(text "outB[15..0]" (rect 97 43 163 58)(font "Intel Clear" (font_size 8)))
+		(line (pt 184 48)(pt 168 48)(line_width 3))
+	)
+	(port
+		(pt 184 64)
+		(output)
+		(text "reg0b[15..0]" (rect 0 0 71 15)(font "Intel Clear" (font_size 8)))
+		(text "reg0b[15..0]" (rect 92 59 163 74)(font "Intel Clear" (font_size 8)))
+		(line (pt 184 64)(pt 168 64)(line_width 3))
+	)
+	(port
+		(pt 184 80)
+		(output)
+		(text "reg1b[15..0]" (rect 0 0 71 15)(font "Intel Clear" (font_size 8)))
+		(text "reg1b[15..0]" (rect 92 75 163 90)(font "Intel Clear" (font_size 8)))
+		(line (pt 184 80)(pt 168 80)(line_width 3))
+	)
+	(port
+		(pt 184 96)
+		(output)
+		(text "reg2b[15..0]" (rect 0 0 71 15)(font "Intel Clear" (font_size 8)))
+		(text "reg2b[15..0]" (rect 92 91 163 106)(font "Intel Clear" (font_size 8)))
+		(line (pt 184 96)(pt 168 96)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 168 176))
+	)
+)

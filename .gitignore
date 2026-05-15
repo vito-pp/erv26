@@ -1,0 +1,28 @@
+# Quartus generated folders
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+
+# Generated files
+*.bak
+*.qws
+*.qdf
+*.rpt
+*.summary
+*.smsg
+*.qmsg
+*.ddb
+*.html
+*.map
+*.jdi
+
+# FPGA programming files
+*.sof
+*.pof
+*.rbf
+
+# Temp/editor
+*.swp
+*~

@@ -63,6 +63,7 @@ set_global_assignment -name VERILOG_FILE alu.v
 set_global_assignment -name VERILOG_FILE fetch.v
 set_global_assignment -name VERILOG_FILE decode.v
 set_global_assignment -name VERILOG_FILE reg16.v
+set_global_assignment -name VERILOG_FILE "Banco de 32 Registros - TEST/reg32.v"
 set_global_assignment -name HEX_FILE prog1.hex
 set_global_assignment -name QIP_FILE progrom.qip
 set_global_assignment -name QIP_FILE mux16_4.qip

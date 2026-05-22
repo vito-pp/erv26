@@ -29,30 +29,24 @@ module reg32
 	integer i;
 
 	always @(posedge clk, negedge nreset) begin
-	
-	// Para evitar los  ifs de escritura, aca podria asignarse x0 = 0 para cada posedge. 
-	// Esto igualmente no asegura que x0 podria ser modificado de manera asyncronica en algun momento. 
-	// Por lo que dejar los condicionales de lectura es buena idea por ahora.
-	registers[0] <= 32'b0;
-	
-	// Resetear todos los registros (misma senal para todos)
+		// Resetear todos los registros (misma senal para todos)
 		if (~nreset) begin
-		
 			// Asynchronous active-low reset clears every register.
 			for (i = 0; i < 32; i = i + 1) begin
 				registers[i] <= 32'b0;
 			end
 		end
-		
-		
-		// Escritura antes que Lectura (Esto es correcto?)
-		else if (clk && ena && write_enable && (address_rd != 5'b0)) begin
+		else begin
+			// x0 is hardwired to zero. Writes to x0 are ignored below.
+			registers[0] <= 32'b0;
+
 			// Synchronous write. Writes to x0 are ignored because x0 must remain zero.
-			registers[address_rd] <= data_rd;
+			if (ena && write_enable && (address_rd != 5'b0)) begin
+				registers[address_rd] <= data_rd;
+			end
 		end
 	end
 
-	// Lectura posterior a escritura.
 	// Asynchronous reads. Reads from x0 always return zero, regardless of stored state.
 	assign data_rs1 = (address_rs1 == 5'b0) ? 32'b0 : registers[address_rs1];
 	assign data_rs2 = (address_rs2 == 5'b0) ? 32'b0 : registers[address_rs2];

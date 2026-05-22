@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(ls \"C:/Users/glouz/Documents/ITBA/5to_Ano/1Q/E5/RISCV/\" 2>&1)"
-    ]
-  }
-}

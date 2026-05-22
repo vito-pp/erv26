@@ -26,3 +26,6 @@ greybox_tmp/
 # Temp/editor
 *.swp
 *~
+
+# Claude Code
+.claude/

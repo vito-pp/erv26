@@ -1,0 +1,128 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 264 288)
+	(text "decode" (rect 5 0 33 12)(font "Arial" ))
+	(text "inst" (rect 8 256 20 268)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "instruction[31..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "instruction[31..0]" (rect 21 27 83 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "opcode[6..0]" (rect 0 0 48 12)(font "Arial" ))
+		(text "opcode[6..0]" (rect 179 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 3))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "instruction_type[5..0]" (rect 0 0 82 12)(font "Arial" ))
+		(text "instruction_type[5..0]" (rect 145 43 227 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 3))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "rd[4..0]" (rect 0 0 29 12)(font "Arial" ))
+		(text "rd[4..0]" (rect 198 59 227 71)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64)(line_width 3))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "rs1[4..0]" (rect 0 0 33 12)(font "Arial" ))
+		(text "rs1[4..0]" (rect 194 75 227 87)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80)(line_width 3))
+	)
+	(port
+		(pt 248 96)
+		(output)
+		(text "rs2[4..0]" (rect 0 0 34 12)(font "Arial" ))
+		(text "rs2[4..0]" (rect 193 91 227 103)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96)(line_width 3))
+	)
+	(port
+		(pt 248 112)
+		(output)
+		(text "funct3[2..0]" (rect 0 0 44 12)(font "Arial" ))
+		(text "funct3[2..0]" (rect 183 107 227 119)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112)(line_width 3))
+	)
+	(port
+		(pt 248 128)
+		(output)
+		(text "funct7[6..0]" (rect 0 0 44 12)(font "Arial" ))
+		(text "funct7[6..0]" (rect 183 123 227 135)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128)(line_width 3))
+	)
+	(port
+		(pt 248 144)
+		(output)
+		(text "reg_write" (rect 0 0 36 12)(font "Arial" ))
+		(text "reg_write" (rect 191 139 227 151)(font "Arial" ))
+		(line (pt 248 144)(pt 232 144)(line_width 1))
+	)
+	(port
+		(pt 248 160)
+		(output)
+		(text "mem_read" (rect 0 0 44 12)(font "Arial" ))
+		(text "mem_read" (rect 183 155 227 167)(font "Arial" ))
+		(line (pt 248 160)(pt 232 160)(line_width 1))
+	)
+	(port
+		(pt 248 176)
+		(output)
+		(text "mem_write" (rect 0 0 44 12)(font "Arial" ))
+		(text "mem_write" (rect 183 171 227 183)(font "Arial" ))
+		(line (pt 248 176)(pt 232 176)(line_width 1))
+	)
+	(port
+		(pt 248 192)
+		(output)
+		(text "wb_src[1..0]" (rect 0 0 48 12)(font "Arial" ))
+		(text "wb_src[1..0]" (rect 179 187 227 199)(font "Arial" ))
+		(line (pt 248 192)(pt 232 192)(line_width 3))
+	)
+	(port
+		(pt 248 208)
+		(output)
+		(text "is_branch" (rect 0 0 38 12)(font "Arial" ))
+		(text "is_branch" (rect 189 203 227 215)(font "Arial" ))
+		(line (pt 248 208)(pt 232 208)(line_width 1))
+	)
+	(port
+		(pt 248 224)
+		(output)
+		(text "is_jump" (rect 0 0 30 12)(font "Arial" ))
+		(text "is_jump" (rect 197 219 227 231)(font "Arial" ))
+		(line (pt 248 224)(pt 232 224)(line_width 1))
+	)
+	(drawing
+		(rectangle (rect 16 16 232 256)(line_width 1))
+	)
+)

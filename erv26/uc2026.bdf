@@ -20,8 +20,24 @@ refer to the Altera Software License Subscription Agreements
 on the Quartus Prime software download page.
 */
 (header "graphic" (version "1.4"))
+(pin
+	(input)
+	(rect -296 -8 -128 8)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "clk" (rect 5 0 22 11)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
 (symbol
-	(rect 136 136 352 264)
+	(rect 96 240 312 368)
 	(text "rom" (rect 95 0 125 16)(font "Arial" (font_size 10)))
 	(text "inst5" (rect 8 113 35 124)(font "Arial" ))
 	(port
@@ -526,10 +542,28 @@ on the Quartus Prime software download page.
 		(rectangle (rect 16 16 176 96))
 	)
 )
-(connector
-	(pt 88 168)
-	(pt 136 168)
-	(bus)
+(symbol
+	(rect 120 104 280 184)
+	(text "slice_9_2" (rect 107 0 155 11)(font "Arial" ))
+	(text "inst8" (rect 128 64 152 76)(font "Intel Clear" ))
+	(port
+		(pt 160 32)
+		(input)
+		(text "in[31..0]" (rect 0 0 46 11)(font "Arial" ))
+		(text "in[31..0]" (rect 93 27 139 38)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
+	)
+	(port
+		(pt 0 32)
+		(output)
+		(text "out[7..0]" (rect 0 0 46 11)(font "Arial" ))
+		(text "out[7..0]" (rect 13 27 59 38)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 144 64))
+	)
+	(flipy)
 )
 (connector
 	(pt 752 544)
@@ -539,11 +573,6 @@ on the Quartus Prime software download page.
 (connector
 	(pt 448 544)
 	(pt 448 616)
-	(bus)
-)
-(connector
-	(pt 448 616)
-	(pt 456 616)
 	(bus)
 )
 (connector
@@ -623,21 +652,6 @@ on the Quartus Prime software download page.
 )
 (connector
 	(pt 384 168)
-	(pt 384 440)
-	(bus)
-)
-(connector
-	(pt 440 440)
-	(pt 384 440)
-	(bus)
-)
-(connector
-	(pt 352 168)
-	(pt 384 168)
-	(bus)
-)
-(connector
-	(pt 384 168)
 	(pt 408 168)
 	(bus)
 )
@@ -699,11 +713,6 @@ on the Quartus Prime software download page.
 (connector
 	(pt 688 440)
 	(pt 688 64)
-	(bus)
-)
-(connector
-	(pt 344 32)
-	(pt 832 32)
 	(bus)
 )
 (connector
@@ -776,16 +785,6 @@ on the Quartus Prime software download page.
 (connector
 	(pt 1072 -56)
 	(pt 1072 48)
-	(bus)
-)
-(connector
-	(pt 896 824)
-	(pt 896 848)
-	(bus)
-)
-(connector
-	(pt 896 848)
-	(pt 680 848)
 	(bus)
 )
 (connector
@@ -878,12 +877,6 @@ on the Quartus Prime software download page.
 	(bus)
 )
 (connector
-	(text "pc[31..0]" (rect 346 0 388 12)(font "Intel Clear" ))
-	(pt 344 0)
-	(pt 296 0)
-	(bus)
-)
-(connector
 	(pt 48 -56)
 	(pt 48 48)
 	(bus)
@@ -902,34 +895,114 @@ on the Quartus Prime software download page.
 	(bus)
 )
 (connector
-	(text "pc[9..2]" (rect 98 144 134 156)(font "Intel Clear" ))
-	(pt 344 104)
-	(pt 88 104)
+	(pt 784 0)
+	(pt 784 32)
 	(bus)
 )
 (connector
-	(pt 88 104)
-	(pt 88 168)
+	(pt 784 32)
+	(pt 832 32)
 	(bus)
 )
 (connector
-	(pt 88 168)
-	(pt 88 272)
+	(pt 384 272)
+	(pt 312 272)
 	(bus)
 )
 (connector
-	(pt 344 0)
-	(pt 344 32)
+	(pt 384 272)
+	(pt 384 440)
 	(bus)
 )
 (connector
-	(pt 344 32)
-	(pt 344 104)
+	(pt 96 272)
+	(pt 40 272)
 	(bus)
 )
-(junction (pt 88 168))
+(connector
+	(text "pc[31..0]" (rect 298 8 340 20)(font "Intel Clear" ))
+	(pt 296 0)
+	(pt 368 0)
+	(bus)
+)
+(connector
+	(pt 368 0)
+	(pt 784 0)
+	(bus)
+)
+(connector
+	(pt 280 136)
+	(pt 368 136)
+	(bus)
+)
+(connector
+	(pt 40 272)
+	(pt 40 136)
+	(bus)
+)
+(connector
+	(pt 40 136)
+	(pt 120 136)
+	(bus)
+)
+(connector
+	(pt 680 848)
+	(pt 896 848)
+	(bus)
+)
+(connector
+	(pt 896 824)
+	(pt 896 848)
+	(bus)
+)
+(connector
+	(pt 384 168)
+	(pt 384 272)
+	(bus)
+)
+(connector
+	(pt -48 352)
+	(pt 96 352)
+)
+(connector
+	(pt -128 0)
+	(pt -48 0)
+)
+(connector
+	(pt -48 0)
+	(pt 104 0)
+)
+(connector
+	(pt 456 664)
+	(pt -48 664)
+)
+(connector
+	(pt -48 0)
+	(pt -48 352)
+)
+(connector
+	(pt -48 352)
+	(pt -48 664)
+)
+(connector
+	(pt 384 440)
+	(pt 440 440)
+	(bus)
+)
+(connector
+	(pt 448 616)
+	(pt 456 616)
+	(bus)
+)
+(connector
+	(pt 368 0)
+	(pt 368 136)
+	(bus)
+)
 (junction (pt 800 168))
-(junction (pt 384 168))
 (junction (pt 688 440))
-(junction (pt 344 32))
 (junction (pt 784 584))
+(junction (pt 368 0))
+(junction (pt 384 272))
+(junction (pt -48 0))
+(junction (pt -48 352))

@@ -5,7 +5,15 @@ ADDRESS_RADIX=HEX;
 DATA_RADIX=HEX;
 
 CONTENT BEGIN
-    00 : 00000013; -- nop
-    01 : 00000013; -- nop
-    02 : 00000013; -- nop
+-- Programa de prueba MVP-0: ejercita ALU + decode + imm + banco de registros.
+    -- Resultado esperado: x1=5, x2=3, x3=8, x4=3, x5=1, x6=7
+    00 : 00500093; -- ADDI x1, x0, 5     ; x1 = 5
+    01 : 00300113; -- ADDI x2, x0, 3     ; x2 = 3
+    02 : 002081B3; -- ADD  x3, x1, x2    ; x3 = x1 + x2 = 8
+    03 : 40118233; -- SUB  x4, x3, x1    ; x4 = x3 - x1 = 3
+    04 : 0020F2B3; -- AND  x5, x1, x2    ; x5 = x1 & x2 = 1
+    05 : 0020E333; -- OR   x6, x1, x2    ; x6 = x1 | x2 = 7
+
+    -- Relleno con NOPs (ADDI x0, x0, 0) hasta el final.
+    [06..FF] : 00000013;
 END;

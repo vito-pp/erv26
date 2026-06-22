@@ -5,14 +5,24 @@ ADDRESS_RADIX=HEX;
 DATA_RADIX=HEX;
 
 CONTENT BEGIN
--- Programa de prueba MVP-0: ejercita ALU + decode + imm + banco de registros.
-    -- Resultado esperado: x1=5, x2=3, x3=8, x4=3, x5=1, x6=7
-    00 : 00500093; -- ADDI x1, x0, 5     ; x1 = 5
-    01 : 00300113; -- ADDI x2, x0, 3     ; x2 = 3
-    02 : 002081B3; -- ADD  x3, x1, x2    ; x3 = x1 + x2 = 8
-    03 : 40118233; -- SUB  x4, x3, x1    ; x4 = x3 - x1 = 3
-    04 : 0020F2B3; -- AND  x5, x1, x2    ; x5 = x1 & x2 = 1
-    05 : 0020E333; -- OR   x6, x1, x2    ; x6 = x1 | x2 = 7
+    -- Programa de prueba MVP-0 con control de saltos (BRANCH + JAL).
+    --
+    --         ADDI x1, x0, 0      ; x1 = 0  (contador)
+    --         ADDI x2, x0, 3      ; x2 = 3  (limite)
+    -- loop:   ADDI x1, x1, 1      ; x1 = x1 + 1
+    --         BNE  x1, x2, loop   ; si x1 != 3 -> volver a loop (offset -4)
+    --         ADDI x5, x0, 0xAA   ; x5 = 0xAA (salio del loop)
+    -- done:   JAL  x0, done       ; salto a si mismo (halt)
+    --
+    -- Esperado: x1 = 3, x2 = 3, x5 = 0xAA, y PC clavado en 0x14.
+    -- byte addr  word
+    --   0x00      00
+    00 : 00000093; -- ADDI x1, x0, 0
+    01 : 00300113; -- ADDI x2, x0, 3
+    02 : 00108093; -- ADDI x1, x1, 1      (loop, byte addr 0x08)
+    03 : FE209EE3; -- BNE  x1, x2, -4     (vuelve a 0x08)
+    04 : 0AA00293; -- ADDI x5, x0, 0xAA
+    05 : 0000006F; -- JAL  x0, 0          (halt: salta a si mismo)
 
     -- Relleno con NOPs (ADDI x0, x0, 0) hasta el final.
     [06..FF] : 00000013;

@@ -74,6 +74,10 @@ set_global_assignment -name BDF_FILE uc2026.bdf
 set_global_assignment -name VERILOG_FILE alu.v
 set_global_assignment -name VERILOG_FILE reg32.v
 set_global_assignment -name VERILOG_FILE ifu.v
+set_global_assignment -name VERILOG_FILE if_id.v
+set_global_assignment -name VERILOG_FILE id_ex.v
+set_global_assignment -name VERILOG_FILE ex_mem.v
+set_global_assignment -name VERILOG_FILE mem_wb.v
 set_global_assignment -name QIP_FILE rom.qip
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top

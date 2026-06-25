@@ -6,43 +6,49 @@ DATA_RADIX=HEX;
 
 CONTENT BEGIN
     -- ============================================================
-    -- PROGRAMA DE DEMOSTRACION ERV26
-    -- Ejercita: ALU con dependencias RAW, STORE, LOAD y salida a LEDs (x31).
+    -- DEMO COMBINADO ERV26  (branch/jump + memoria + LEDs)
+    -- Si en los LEDs ves 0b00001111 (15) -> TODO anda:
+    --   - el loop sumo 1+2+3+4+5 = 15  (branch BLT + jump)
+    --   - se guardo 15 en memoria        (STORE)
+    --   - se leyo 15 de vuelta           (LOAD)
+    --   - salio a x31 -> LEDs[7:0]        (I/O)
+    -- Pistas de error:
+    --   1 LED (valor 1)  -> el branch nunca salta (no hay loop)
+    --   0 LEDs           -> loop infinito o la mem fallo
     -- ============================================================
     --
-    -- --- Bloque ALU (dependencias RAW a distancia 1, sin hazard) ---
-    --   ADDI x1, x0, 5      ; x1 = 5
-    --   ADDI x2, x0, 3      ; x2 = 3
-    --   ADD  x3, x1, x2     ; x3 = 8   (usa x1, x2 recien escritos -> RAW)
-    --   SUB  x4, x3, x2     ; x4 = 5   (usa x3 recien escrito -> RAW dist 1)
-    --   XOR  x5, x1, x2     ; x5 = 6   (5 ^ 3 = 6)
-    --
-    -- --- Bloque memoria (STORE + LOAD) ---
-    --   SW   x3, 0(x0)      ; mem[0] = 8
-    --   (3 NOP: dejar asentar el STORE por la latencia de la RAM)
-    --   LW   x6, 0(x0)      ; x6 = mem[0] = 8
-    --   (2 NOP: delay slots del LOAD, latencia de la RAM)
-    --
-    -- --- Salida a LEDs ---
-    --   ADD  x31, x6, x5    ; x31 = 8 + 6 = 14 (0x0E) -> LEDs[7:0]
-    --   JAL  x0, 0          ; halt
-    --
-    -- ESPERADO: x1=5 x2=3 x3=8 x4=5 x5=6 x6=8 x31=14 ; mem[0]=8 ; LEDs[7:0]=0x0E (0b00001110)
+    -- --- Loop de sumas (branch + jump) ---
+    --          ADDI x1, x0, 0      ; x1 = sum = 0
+    --          ADDI x2, x0, 1      ; x2 = i   = 1
+    --          ADDI x3, x0, 6      ; x3 = lim = 6
+    -- loop:    ADD  x1, x1, x2     ; sum += i        (byte 0x0C)
+    --          ADDI x2, x2, 1      ; i++
+    --          BLT  x2, x3, loop   ; if i < 6 -> loop (offset -8)
+    --                              ; al salir, x1 = 15
+    -- --- Round-trip por memoria (STORE + LOAD) ---
+    --          SW   x1, 0(x0)      ; mem[0] = 15
+    --          NOP x3              ; dejar asentar el STORE
+    --          LW   x4, 0(x0)      ; x4 = 15
+    --          NOP x2              ; load delay slots
+    -- --- Salida ---
+    --          ADD  x31, x4, x0    ; x31 = 15 -> LEDs
+    -- done:    JAL  x0, done       ; halt
     -- ============================================================
-    00 : 00500093; -- ADDI x1, x0, 5
-    01 : 00300113; -- ADDI x2, x0, 3
-    02 : 002081B3; -- ADD  x3, x1, x2     ; x3 = 8
-    03 : 40218233; -- SUB  x4, x3, x2     ; x4 = 5
-    04 : 0020C2B3; -- XOR  x5, x1, x2     ; x5 = 6
-    05 : 00302023; -- SW   x3, 0(x0)      ; mem[0] = 8
-    06 : 00000013; -- NOP
+    00 : 00000093; -- ADDI x1, x0, 0
+    01 : 00100113; -- ADDI x2, x0, 1
+    02 : 00800193; -- ADDI x3, x0, 6
+    03 : 002080B3; -- ADD  x1, x1, x2     (loop, byte 0x0C)
+    04 : 00110113; -- ADDI x2, x2, 1
+    05 : FE314CE3; -- BLT  x2, x3, -8     (vuelve a 0x0C)
+    06 : 00102023; -- SW   x1, 0(x0)      ; mem[0] = 15
     07 : 00000013; -- NOP
     08 : 00000013; -- NOP
-    09 : 00002303; -- LW   x6, 0(x0)      ; x6 = 8
-    0A : 00000013; -- NOP   (load delay slot 1)
-    0B : 00000013; -- NOP   (load delay slot 2)
-    0C : 00530FB3; -- ADD  x31, x6, x5    ; x31 = 14 -> LEDs[7:0]
-    0D : 0000006F; -- JAL  x0, 0          ; halt
+    09 : 00000013; -- NOP
+    0A : 00002203; -- LW   x4, 0(x0)      ; x4 = 15
+    0B : 00000013; -- NOP   (load delay slot 1)
+    0C : 00000013; -- NOP   (load delay slot 2)
+    0D : 00020FB3; -- ADD  x31, x4, x0    ; x31 = 15 -> LEDs[7:0]
+    0E : 0000006F; -- JAL  x0, 0          ; halt
 
-    [0E..FF] : 00000013; -- NOP
+    [0F..FF] : 00000013; -- NOP
 END;

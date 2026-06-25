@@ -94,6 +94,13 @@ on the Quartus Prime software download page.
 		(text "data_rs2[31..0]" (rect 152 43 211 55)(font "Arial" ))
 		(line (pt 232 48)(pt 216 48)(line_width 3))
 	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "leds_out[7..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "leds_out[7..0]" (rect 158 59 211 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 3))
+	)
 	(drawing
 		(rectangle (rect 16 16 216 160)(line_width 1))
 	)

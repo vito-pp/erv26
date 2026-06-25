@@ -20,7 +20,11 @@ module reg32
  
  // Output signals
  output [31:0] data_rs1,
- output [31:0] data_rs2
+ output [31:0] data_rs2,
+
+ // Salida mapeada a I/O: los 8 bits bajos de x31 -> 8 LEDs (DE10-Nano).
+ // Ya viene sliceado, se conecta directo a los pines LED[7..0].
+ output [7:0] leds_out
  );
 
 	// Register bank: x0 to x31. Register x0 is kept fixed at zero by logic below.
@@ -50,5 +54,8 @@ module reg32
 	// Asynchronous reads. Reads from x0 always return zero, regardless of stored state.
 	assign data_rs1 = (address_rs1 == 5'b0) ? 32'b0 : registers[address_rs1];
 	assign data_rs2 = (address_rs2 == 5'b0) ? 32'b0 : registers[address_rs2];
+
+	// Los 8 bits bajos de x31 salen directo a los 8 LEDs de la DE10-Nano.
+	assign leds_out = registers[31][7:0];
 
 endmodule

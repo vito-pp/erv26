@@ -28,7 +28,7 @@ module reg32
 	reg [31:0] registers [31:0];
 	integer i;
 
-	always @(posedge clk, posedge reset) begin
+	always @(negedge clk, posedge reset) begin
 		// Resetear todos los registros (misma senal para todos)
 		if (reset) begin
 			// Asynchronous active-low reset clears every register.

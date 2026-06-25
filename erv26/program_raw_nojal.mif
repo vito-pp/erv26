@@ -1,0 +1,29 @@
+WIDTH=32;
+DEPTH=256;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+    -- IGUAL que program_raw PERO sin el JAL halt al final.
+    -- Sirve para aislar si el salto/halt corrompe x4 y x5.
+    --
+    --   ADDI x1, x0, 1      ; x1 = 1
+    --   ADD  x2, x1, x1     ; x2 = 2
+    --   ADD  x3, x2, x2     ; x3 = 4
+    --   ADD  x4, x3, x3     ; x4 = 8
+    --   ADD  x5, x4, x4     ; x5 = 16
+    --   (resto NOPs, sin salto)
+    --
+    -- ESPERADO: x1=1, x2=2, x3=4, x4=8, x5=16
+    --
+    -- Si AHORA x4=8 y x5=16  -> el JAL/halt era el culpable (no la cadena).
+    -- Si x4 sigue en 24      -> el problema esta en la cadena/pipeline, no en el JAL.
+    00 : 00100093; -- ADDI x1, x0, 1
+    01 : 00108133; -- ADD  x2, x1, x1
+    02 : 002101B3; -- ADD  x3, x2, x2
+    03 : 00318233; -- ADD  x4, x3, x3
+    04 : 004202B3; -- ADD  x5, x4, x4
+
+    [05..FF] : 00000013; -- NOP (sin salto)
+END;

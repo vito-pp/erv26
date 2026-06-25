@@ -1,0 +1,28 @@
+WIDTH=32;
+DEPTH=256;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+    -- TEST RAW de ALU: cadena de dependencias a distancia 1.
+    -- Cada ADD usa el resultado del ADD anterior.
+    --
+    --   ADDI x1, x0, 1      ; x1 = 1
+    --   ADD  x2, x1, x1     ; x2 = 2   (usa x1, dist 1)
+    --   ADD  x3, x2, x2     ; x3 = 4   (usa x2, dist 1)
+    --   ADD  x4, x3, x3     ; x4 = 8   (usa x3, dist 1)
+    --   ADD  x5, x4, x4     ; x5 = 16  (usa x4, dist 1)
+    --   JAL  x0, 0          ; halt
+    --
+    -- ESPERADO (sin hazard): x1=1, x2=2, x3=4, x4=8, x5=16  (potencias de 2)
+    -- SI HAY HAZARD dist-1: la cadena colapsa (x2=0 -> todo 0, o valores raros).
+    00 : 00100093; -- ADDI x1, x0, 1
+    01 : 00108133; -- ADD  x2, x1, x1
+    02 : 002101B3; -- ADD  x3, x2, x2
+    03 : 00318233; -- ADD  x4, x3, x3
+    04 : 004202B3; -- ADD  x5, x4, x4
+    05 : 0000006F; -- JAL  x0, 0   (halt)
+
+    [06..FF] : 00000013; -- NOP
+END;

@@ -1,0 +1,26 @@
+WIDTH=32;
+DEPTH=256;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+    -- TEST aislado de los puertos de lectura del banco.
+    --
+    --   ADDI x1, x0, 5     ; x1 = 5
+    --   ADD  x2, x0, x1    ; x2 = x0 + x1  -> rs1=x0(0), rs2=x1  (testea PUERTO rs2)
+    --   ADD  x3, x1, x0    ; x3 = x1 + x0  -> rs1=x1, rs2=x0(0)  (testea PUERTO rs1)
+    --   JAL  x0, 0         ; halt
+    --
+    -- ESPERADO: x1=5, x2=5, x3=5
+    --   - Si x2 != 5  -> el puerto rs2 (operando B) esta mal (cableado o lectura).
+    --   - Si x3 != 5  -> el puerto rs1 (operando A) esta mal.
+    --   - Si ambos = 5 -> los dos puertos leen bien; el bug de antes es de
+    --                     alineacion o de otra instruccion puntual.
+    00 : 00500093; -- ADDI x1, x0, 5
+    01 : 00100133; -- ADD  x2, x0, x1   (rs2 = x1)
+    02 : 000081B3; -- ADD  x3, x1, x0   (rs1 = x1)
+    03 : 0000006F; -- JAL  x0, 0   (halt)
+
+    [04..FF] : 00000013; -- NOP
+END;
